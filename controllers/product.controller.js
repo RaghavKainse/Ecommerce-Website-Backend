@@ -1,13 +1,18 @@
 const producModel = require("../models/product.Model");
 
 // Add Products
-exports.addProduct = async (req, res) => {
-  // console.log(req.body);
+exports.createProduct = async (req, res, next) => {
   try {
-    const { name, description, price, stock, image_url } = req.body;
-    if (!name || !price || !stock || !image_url == null) {
-      return res.status(400).json({ message: "All feilds are required" });
-    }
+    const { name, description, price, stock } = req.body;
+
+    if (!name || !price || stock == null) {
+      return res.status(400).json({
+        message: "Name, price and stock required",
+      });
+    } 
+
+    // Get uploaded file path
+    const image_url = req.file ? `/uploads/${req.file.filename}` : null;
 
     const result = await producModel.createProduct({
       name,
@@ -16,8 +21,9 @@ exports.addProduct = async (req, res) => {
       stock,
       image_url,
     });
-    return res.status(201).json({
-      message: "Product Created Successfully",
+
+    res.status(201).json({
+      message: "Product created successfully",
       productId: result.insertId,
     });
   } catch (error) {
@@ -35,3 +41,14 @@ exports.getAllProducts = async (req, res, next) => {
     next(error);
   }
 };
+
+// Delete Products
+
+exports.removeProducts=async (req,res,next)=>{
+  try{
+    const removed= await producModel.removeProduct;
+    res.status(200).json({message:"Product Deleted Succesfully"})
+  }catch(error){
+    next(error)
+  }
+}
