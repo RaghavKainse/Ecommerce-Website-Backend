@@ -15,7 +15,10 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("Api Working....");
 });
-
+app.get("/test-db", async (req, res) => {
+  const [rows] = await pool.query("SELECT 1");
+  res.json(rows);
+});
 // user
 app.use("/api/auth", userAuthRoutes);
 // admin
