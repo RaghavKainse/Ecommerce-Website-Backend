@@ -2,3 +2,16 @@ http://localhost:5000/api/auth/admin/login
 
 http://localhost:5000/api/admin/dashboard
 
+
+admin     ________________     raghavkainse@gmail.com
+Password -----------------     {
+    "email": "raghavkainse@gmail.com",
+    "password": "raghav123"
+}
+
+user first 
+{
+"name":"Rahul",
+"email":"rahul@test.com",
+"password":"123456"
+}

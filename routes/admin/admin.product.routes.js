@@ -11,6 +11,7 @@ router.post(
   controller.createProduct,
 );
 router.get("/", protectAdmin, controller.getAllProducts);
-router.delete("/", protectAdmin, controller.removeProducts);
+router.delete("/:id", protectAdmin, controller.deleteProducts);
+router.put("/:id", protectAdmin,upload.single("image"), controller.updateProduct);
 
 module.exports = router;
